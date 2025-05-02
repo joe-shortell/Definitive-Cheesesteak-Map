@@ -1,0 +1,11 @@
+# config.yaml
+tier_dict:
+  1: "The Best of the Best"
+  2: "Standout Steaks"
+  3: "Solid Steaks"
+  4: "Off the Podium"
+  5: "Tasting in Progress"
+
+basemap_type: "CartoDB positron"
+
+icon_file_type: "png"
