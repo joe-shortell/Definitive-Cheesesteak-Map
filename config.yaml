@@ -1,4 +1,9 @@
 # config.yaml
+title: The Cheesesteak Guide to Philadelphia
+
+description: >
+  This map shows you where you need to go if you want to taste the best cheesesteaks that Philadelphia has to offer.
+
 tier_dict:
   1: "The Best of the Best"
   2: "Standout Steaks"
