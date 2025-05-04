@@ -2,23 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Cheesesteak Map</title>
+  <title>{{ title }}</title>
 
   <style>
     body {
       margin: 0;
       display: flex;
-      font-family: Georgia, serif;
+      font-family: {{ sidebar_style['font_family'] }};
       height: 100vh;
     }
 
     #sidebar {
-      width: 300px;
-      padding: 20px;
-      background: linear-gradient(to bottom, #f5f2ea, #e8e0d0);
-      border-right: 2px solid #ccc;
-      box-shadow: 2px 0 6px rgba(0,0,0,0.2);
-      overflow-y: auto;
+      width: {{ sidebar_style['width'] }};
+      padding: {{ sidebar_style['padding'] }};
+      background: {{ sidebar_style['sidebar_bg'] }};
+      border-right: {{ sidebar_style['border_right'] }};
+      box-shadow: {{ sidebar_style['box_shadow'] }};
+      overflow-y: {{ sidebar_style['overflow_y'] }};
     }
 
     #map-container {
@@ -33,13 +33,7 @@
     }
 
     .legend li {
-      margin-bottom: 10px;
-    }
-
-    .legend img {
-      height: 32px;
-      vertical-align: middle;
-      margin-right: 8px;
+      {{ sidebar_style['legend_item_style'] }}
     }
 
     iframe {
@@ -53,8 +47,8 @@
 <body>
   <div id="sidebar">
     <div class="sidebar-section">
-      <h1>{{ title }}</h1>
-      <p>{{ description }}</p>
+      <h1 style="{{ sidebar_style['title_style'] }}">{{ title }}</h1>
+      <p style="{{ sidebar_style['body_text_style'] }}">{{ description }}</p>
     </div>
 
     <div class="sidebar-section">
