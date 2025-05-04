@@ -1,0 +1,59 @@
+<style>
+    /* Override Leaflet's wrapper, but preserve the pointer tip */
+    .leaflet-popup-content-wrapper {{
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+    }}
+
+    .leaflet-popup-content {{
+        margin: 0 !important;
+        padding: 0 !important;
+        width: auto !important;
+        max-width: none !important;
+    }}
+
+    /* Restore the triangle tip and match it to popup background */
+    .leaflet-popup-tip {{
+        background: {background_color} !important;
+        box-shadow: {shadow} !important;
+        border: 2px solid {border_color} !important;
+    }}
+</style>
+
+<div style="
+    display: flex; 
+    border: 2px solid {border_color}; 
+    border-radius: {border_radius}; 
+    padding: 10px; 
+    width: 290px;  
+    min-height: 120px; 
+    background-color: {background_color}; 
+    color: {text_color}; 
+    box-shadow: {shadow};
+">
+    <div style="
+        flex: 2.2; 
+        margin-right: 10px; 
+        border-right: 2px solid {border_color}; 
+        padding-right: 10px;
+    ">
+        <h4 style="margin: 0; color: {highlight_color};">{location}</h4>
+        <p style="margin: 5px 0;">{description}</p>
+    </div>
+    <div style="
+        flex: 1.2; 
+        border-left: 2px solid {border_color}; 
+        padding-left: 10px; 
+        display: flex; 
+        align-items: flex-start;
+    ">
+        <img src="{image}" alt="Image" style="
+            width: 70px; 
+            height: 100px; 
+            object-fit: cover; 
+            border-radius: {image_border_radius};
+        ">
+    </div>
+</div>

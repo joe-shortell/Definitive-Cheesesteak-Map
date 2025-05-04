@@ -29,11 +29,13 @@ sidebar_style:
   legend_item_style: "font-size: 14px; color: #444; font-weight: bold;"
 
 popup_style:
-  border_color: "#228B22"         # forest green
+  border_color: "#5c7c66"           # muted sage green (awning stripe)
   border_radius: "12px"
-  background_color: "#000000"     # pure black
-  text_color: "#FFFFFF"           # white for contrast
-  highlight_color: "#FF0000"      # bright red
+  background_color: "#ede3d3"       # warm cream (brick mortar + trim)
+  text_color: "#4b3d33"             # deep brown (shadow detail)
+  highlight_color: "#88a68c"        # soft accent green (awning highlight)
   image_border_radius: "6px"
-  shadow: "3px 3px 8px rgba(255, 255, 255, 0.2)"  # subtle white shadow
+  shadow: "3px 3px 8px rgba(76, 70, 61, 0.25)"  # warm brown shadow
+  width: "280px"
+  padding: "12px"
 
