@@ -20,15 +20,20 @@
         box-shadow: {shadow} !important;
         border: 2px solid {border_color} !important;
     }}
+
+    .popup-container {{
+        font-family: {font_family};
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }}
 </style>
 
-<div style="
+<div class="popup-container" style="
     display: flex; 
     border: 2px solid {border_color}; 
     border-radius: {border_radius}; 
-    padding: 10px; 
-    width: 290px;  
-    min-height: 120px; 
+    padding: {padding}; 
+    width: {width};  
     background-color: {background_color}; 
     color: {text_color}; 
     box-shadow: {shadow};
@@ -39,8 +44,8 @@
         border-right: 2px solid {border_color}; 
         padding-right: 10px;
     ">
-        <h4 style="margin: 0; color: {highlight_color};">{location}</h4>
-        <p style="margin: 5px 0;">{description}</p>
+        <h4 style="margin: 0; {title_font_style}">{location}</h4>
+        <p style="margin: 5px 0; {body_font_style}">{description}</p>
     </div>
     <div style="
         flex: 1.2; 
@@ -50,8 +55,8 @@
         align-items: flex-start;
     ">
         <img src="{image}" alt="Image" style="
-            width: 70px; 
-            height: 100px; 
+            width: {image_width}; 
+            height: {image_height}; 
             object-fit: cover; 
             border-radius: {image_border_radius};
         ">
