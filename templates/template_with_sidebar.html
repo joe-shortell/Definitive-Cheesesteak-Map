@@ -3,13 +3,20 @@
 <head>
   <meta charset="utf-8">
   <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    body {
+    html, body {
       margin: 0;
-      display: flex;
+      padding: 0;
       font-family: {{ sidebar_style['font_family'] }};
-      height: 100vh;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: row;
     }
 
     #sidebar {
@@ -18,7 +25,8 @@
       background: {{ sidebar_style['sidebar_bg'] }};
       border-right: {{ sidebar_style['border_right'] }};
       box-shadow: {{ sidebar_style['box_shadow'] }};
-      overflow-y: {{ sidebar_style['overflow_y'] }};
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
 
     #map-container {
@@ -41,16 +49,67 @@
       height: 100%;
       border: none;
     }
+
+    /* MOBILE STYLES */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      #sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 40px; /* collapsed height showing just handle */
+        padding: 0 12px;
+        background: {{ sidebar_style['sidebar_bg'] }};
+        border: none;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+        border-radius: 16px 16px 0 0;
+        z-index: 1000;
+        transition: height 0.3s ease;
+        overflow: hidden;
+      }
+
+      #sidebar.open {
+        height: 80vh; /* full view */
+        padding: 12px;
+      }
+
+      #drag-handle {
+        width: 50px;
+        height: 6px;
+        background: #aaa;
+        border-radius: 3px;
+        margin: 8px auto;
+        cursor: grab;
+      }
+
+      .sidebar-section {
+        display: none;
+      }
+
+      #sidebar.open .sidebar-section {
+        display: block;
+      }
+
+      #map-container {
+        flex: none;
+        height: calc(100vh - 40px); /* subtract collapsed sidebar height */
+      }
+    }
   </style>
 </head>
 
 <body>
   <div id="sidebar">
+    <div id="drag-handle"></div>
     <div class="sidebar-section">
       <h1 style="{{ sidebar_style['title_style'] }}">{{ title }}</h1>
       <p style="{{ sidebar_style['body_text_style'] }}">{{ description }}</p>
     </div>
-
     <div class="sidebar-section">
       <div class="legend-wrapper">
         <ul class="legend">
@@ -63,5 +122,49 @@
   <div id="map-container">
     <iframe src="map.html"></iframe>
   </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const dragHandle = document.getElementById('drag-handle');
+
+    let startY = 0;
+    let isDragging = false;
+
+    function startDrag(e) {
+      isDragging = true;
+      startY = e.touches ? e.touches[0].clientY : e.clientY;
+      document.addEventListener('mousemove', onDrag);
+      document.addEventListener('touchmove', onDrag);
+      document.addEventListener('mouseup', endDrag);
+      document.addEventListener('touchend', endDrag);
+    }
+
+    function onDrag(e) {
+      if (!isDragging) return;
+      const currentY = e.touches ? e.touches[0].clientY : e.clientY;
+      const deltaY = currentY - startY;
+
+      // If dragging up
+      if (deltaY < -30) {
+        sidebar.classList.add('open');
+      }
+
+      // If dragging down
+      if (deltaY > 30) {
+        sidebar.classList.remove('open');
+      }
+    }
+
+    function endDrag() {
+      isDragging = false;
+      document.removeEventListener('mousemove', onDrag);
+      document.removeEventListener('touchmove', onDrag);
+      document.removeEventListener('mouseup', endDrag);
+      document.removeEventListener('touchend', endDrag);
+    }
+
+    dragHandle.addEventListener('mousedown', startDrag);
+    dragHandle.addEventListener('touchstart', startDrag);
+  </script>
 </body>
 </html>
