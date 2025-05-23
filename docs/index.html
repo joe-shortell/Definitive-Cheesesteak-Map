@@ -62,8 +62,9 @@
         left: 0;
         right: 0;
         width: 100%;
-        height: 40px; /* collapsed height showing just handle */
-        padding: 0 12px;
+        height: auto;
+        min-height: 72px; /* fallback minimum height */
+        padding: 0;
         background: linear-gradient(to bottom, #e9efe8, #a4b99f, #e4d7c5, #c37c65);
         border: none;
         box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
@@ -71,11 +72,33 @@
         z-index: 1000;
         transition: height 0.3s ease;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
       }
 
       #sidebar.open {
-        height: 80vh; /* full view */
-        padding: 12px;
+        height: 80vh !important;
+      }
+
+      #sidebar.dragging {
+        transition: none !important;
+      }
+
+      #sidebar-banner {
+        width: 100%;
+        cursor: grab;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        flex-shrink: 0;
+        padding: 8px 12px 4px 12px;
+        gap: 4px;
+      }
+
+      #drag-handle-wrapper {
+        display: flex;
+        justify-content: center;
       }
 
       #drag-handle {
@@ -83,21 +106,40 @@
         height: 6px;
         background: #aaa;
         border-radius: 3px;
-        margin: 8px auto;
-        cursor: grab;
       }
 
-      .sidebar-section {
-        display: none;
+      #sidebar-title {
+        font-size: 14px;
+        margin: 0;
+        text-align: left;
+        white-space: normal;
+        word-break: break-word;
+        overflow: visible;
+        line-height: 1.2;
+        width: 100%;
       }
 
-      #sidebar.open .sidebar-section {
+      #sidebar-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px;
         display: block;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      #sidebar.open #sidebar-content,
+      #sidebar.dragging #sidebar-content {
+        opacity: 1;
+      }
+
+      #sidebar:not(.open):not(.dragging) #sidebar-content {
+        display: none;
       }
 
       #map-container {
         flex: none;
-        height: calc(100vh - 40px); /* subtract collapsed sidebar height */
+        height: calc(100vh - var(--collapsed-height, 72px));
       }
     }
   </style>
@@ -105,16 +147,21 @@
 
 <body>
   <div id="sidebar">
-    <div id="drag-handle"></div>
-    <div class="sidebar-section">
-      <h1 style="font-weight: bold; font-size: 24px; color: #333;">The Cheesesteak Guide to Philadelphia</h1>
-      <p style="font-size: 16px; color: #555;">This map shows you where you need to go if you want to taste the best cheesesteaks that Philadelphia has to offer.
-</p>
+    <div id="sidebar-banner">
+      <div id="drag-handle-wrapper">
+        <div id="drag-handle"></div>
+      </div>
+      <h1 id="sidebar-title" style="font-weight: bold; font-size: 24px; color: #333;">The Cheesesteak Guide to Philadelphia</h1>
     </div>
-    <div class="sidebar-section">
-      <div class="legend-wrapper">
-        <ul class="legend">
-          
+    <div id="sidebar-content">
+      <div class="sidebar-section">
+        <p style="font-size: 16px; color: #555;">This map shows you where you need to go if you want to taste the best cheesesteaks that Philadelphia has to offer.
+</p>
+      </div>
+      <div class="sidebar-section">
+        <div class="legend-wrapper">
+          <ul class="legend">
+            
         <li style="margin-bottom: 10px;">
             <img src="icons/tier_1.png" style="height: 32px; vertical-align: middle;">
             – The Best of the Best
@@ -140,7 +187,8 @@
             – Tasting in Progress
         </li>
     
-        </ul>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -151,14 +199,33 @@
 
   <script>
     const sidebar = document.getElementById('sidebar');
-    const dragHandle = document.getElementById('drag-handle');
+    const sidebarBanner = document.getElementById('sidebar-banner');
 
-    let startY = 0;
     let isDragging = false;
+    let startY = 0;
+    let startHeight = 0;
+    let totalDeltaY = 0;
+
+    function getCollapsedHeight() {
+      return sidebarBanner.offsetHeight;
+    }
+
+    function setCollapsedHeight(height) {
+      sidebar.style.height = height + 'px';
+      document.documentElement.style.setProperty('--collapsed-height', height + 'px');
+    }
 
     function startDrag(e) {
+      if (window.innerWidth > 768) return;
+
       isDragging = true;
       startY = e.touches ? e.touches[0].clientY : e.clientY;
+      startHeight = sidebar.offsetHeight;
+      totalDeltaY = 0;
+
+      sidebar.classList.add('dragging');
+      sidebar.classList.remove('open');
+
       document.addEventListener('mousemove', onDrag);
       document.addEventListener('touchmove', onDrag);
       document.addEventListener('mouseup', endDrag);
@@ -167,30 +234,64 @@
 
     function onDrag(e) {
       if (!isDragging) return;
+
       const currentY = e.touches ? e.touches[0].clientY : e.clientY;
-      const deltaY = currentY - startY;
+      const deltaY = startY - currentY;
+      totalDeltaY = deltaY;
 
-      // If dragging up
-      if (deltaY < -30) {
-        sidebar.classList.add('open');
-      }
-
-      // If dragging down
-      if (deltaY > 30) {
-        sidebar.classList.remove('open');
-      }
+      const newHeight = Math.min(window.innerHeight, Math.max(getCollapsedHeight(), startHeight + deltaY));
+      sidebar.style.height = newHeight + 'px';
     }
 
     function endDrag() {
+      if (!isDragging) return;
+
+      sidebar.classList.remove('dragging');
       isDragging = false;
+
+      const swipeThreshold = 50;
+      const heightThreshold = window.innerHeight / 2;
+      const collapsedHeight = getCollapsedHeight();
+
+      if (totalDeltaY > swipeThreshold) {
+        sidebar.classList.add('open');
+        sidebar.style.height = '80vh';
+      } else if (totalDeltaY < -swipeThreshold) {
+        sidebar.classList.remove('open');
+        setCollapsedHeight(collapsedHeight);
+      } else {
+        const currentHeight = sidebar.offsetHeight;
+        if (currentHeight > heightThreshold) {
+          sidebar.classList.add('open');
+          sidebar.style.height = '80vh';
+        } else {
+          sidebar.classList.remove('open');
+          setCollapsedHeight(collapsedHeight);
+        }
+      }
+
       document.removeEventListener('mousemove', onDrag);
       document.removeEventListener('touchmove', onDrag);
       document.removeEventListener('mouseup', endDrag);
       document.removeEventListener('touchend', endDrag);
     }
 
-    dragHandle.addEventListener('mousedown', startDrag);
-    dragHandle.addEventListener('touchstart', startDrag);
+    sidebar.addEventListener('mousedown', startDrag);
+    sidebar.addEventListener('touchstart', startDrag);
+
+    window.addEventListener('load', () => {
+      if (window.innerWidth <= 768) {
+        const collapsedHeight = getCollapsedHeight();
+        setCollapsedHeight(collapsedHeight);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768 && !sidebar.classList.contains('open')) {
+        const collapsedHeight = getCollapsedHeight();
+        setCollapsedHeight(collapsedHeight);
+      }
+    });
   </script>
 </body>
 </html>
