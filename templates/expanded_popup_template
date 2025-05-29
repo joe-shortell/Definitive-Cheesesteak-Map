@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{location}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: {font_family};
+            background-color: {background_color};
+            color: {text_color};
+        }
+        h1 {
+            {title_font_style}
+        }
+        p {
+            {body_font_style}
+        }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+        }
+        .carousel img {
+            max-height: 400px;
+            border-radius: {image_border_radius};
+        }
+    </style>
+</head>
+<body>
+    <h1>{location}</h1>
+    <p>{description}</p>
+    <div class="carousel">
+        {image_tags}
+    </div>
+</body>
+</html>
