@@ -1,0 +1,210 @@
+[
+  {
+    "name": "Avenue Steaks & Pizza",
+    "slug": "avenue_steaks_pizza",
+    "description": "No description available",
+    "tier": 5,
+    "latitude": 39.9168539,
+    "longitude": -75.1700104
+  },
+  {
+    "name": "Tony and Nick's Steaks",
+    "slug": "tony_and_nicks_steaks",
+    "description": "No description available",
+    "tier": 5,
+    "latitude": 39.91412,
+    "longitude": -75.1486488
+  },
+  {
+    "name": "Frizwit",
+    "slug": "frizwit",
+    "description": "No description available",
+    "tier": 5,
+    "latitude": 39.9263366,
+    "longitude": -75.1474124
+  },
+  {
+    "name": "SQ Philip's Steaks",
+    "slug": "sq_philips_steaks",
+    "description": "No description available",
+    "tier": 5,
+    "latitude": 39.9226174,
+    "longitude": -75.184822
+  },
+  {
+    "name": "Oh Brother Philly",
+    "slug": "oh_brother_philly",
+    "description": "No description available",
+    "tier": 5,
+    "latitude": 39.9496989,
+    "longitude": -75.1441608
+  },
+  {
+    "name": "Sonny's Famous Steaks",
+    "slug": "sonnys_famous_steaks",
+    "description": "No description available",
+    "tier": 5,
+    "latitude": 39.949782,
+    "longitude": -75.1448014
+  },
+  {
+    "name": "Joe's Steaks + Soda Shop",
+    "slug": "joes_steaks_soda_shop",
+    "description": "No description available",
+    "tier": 5,
+    "latitude": 39.9690049,
+    "longitude": -75.1345739
+  },
+  {
+    "name": "Max's Steaks",
+    "slug": "maxs_steaks",
+    "description": "No description available",
+    "tier": 5,
+    "latitude": 40.0089586,
+    "longitude": -75.1504451
+  },
+  {
+    "name": "Shank's Original",
+    "slug": "shanks_original",
+    "description": "No description available",
+    "tier": 5,
+    "latitude": 39.9348071,
+    "longitude": -75.1420536
+  },
+  {
+    "name": "John's Roast Pork",
+    "slug": "johns_roast_pork",
+    "description": "No description available",
+    "tier": 4,
+    "latitude": 39.9214442,
+    "longitude": -75.1444593
+  },
+  {
+    "name": "Pat's King of Steaks",
+    "slug": "pats_king_of_steaks",
+    "description": "No description available",
+    "tier": 4,
+    "latitude": 39.9331995,
+    "longitude": -75.1592409
+  },
+  {
+    "name": "Geno's Steaks",
+    "slug": "genos_steaks",
+    "description": "No description available",
+    "tier": 4,
+    "latitude": 39.9337883,
+    "longitude": -75.1588475
+  },
+  {
+    "name": "Cleavers",
+    "slug": "cleavers",
+    "description": "No description available",
+    "tier": 4,
+    "latitude": 39.9514103,
+    "longitude": -75.1706011
+  },
+  {
+    "name": "Dalessandro's Steaks",
+    "slug": "dalessandros_steaks",
+    "description": "No description available",
+    "tier": 4,
+    "latitude": 40.0294892,
+    "longitude": -75.2059682
+  },
+  {
+    "name": "The Fresh Works",
+    "slug": "the_fresh_works",
+    "description": "No description available",
+    "tier": 3,
+    "latitude": 39.93453584,
+    "longitude": -75.17942387
+  },
+  {
+    "name": "Ishkabibble's II",
+    "slug": "ishkabibbles_ii",
+    "description": "No description available",
+    "tier": 3,
+    "latitude": 39.9419783,
+    "longitude": -75.1514209
+  },
+  {
+    "name": "Cosmi's Deli",
+    "slug": "cosmis_deli",
+    "description": "No description available",
+    "tier": 3,
+    "latitude": 39.9302666,
+    "longitude": -75.1579987
+  },
+  {
+    "name": "Pizza Plus South",
+    "slug": "pizza_plus_south",
+    "description": "No description available",
+    "tier": 3,
+    "latitude": 39.9264873,
+    "longitude": -75.16565337
+  },
+  {
+    "name": "Woodrow's Sandwich Shop",
+    "slug": "woodrows_sandwich_shop",
+    "description": "No description available",
+    "tier": 2,
+    "latitude": 39.9419706,
+    "longitude": -75.1532384
+  },
+  {
+    "name": "Jim's South St",
+    "slug": "jims_south_st",
+    "description": "No description available",
+    "tier": 2,
+    "latitude": 39.9414981,
+    "longitude": -75.1493058
+  },
+  {
+    "name": "Jaxx Steaks Taproom",
+    "slug": "jaxx_steaks_taproom",
+    "description": "No description available",
+    "tier": 2,
+    "latitude": 39.9315261,
+    "longitude": -75.14963704
+  },
+  {
+    "name": "Nifty Fifty's",
+    "slug": "nifty_fiftys",
+    "description": "No description available",
+    "tier": 2,
+    "latitude": 39.91579027,
+    "longitude": -75.16481433
+  },
+  {
+    "name": "Nipotina",
+    "slug": "nipotina",
+    "description": "Bold uses of flavors executed perfectly.",
+    "tier": 1,
+    "latitude": 39.92351396,
+    "longitude": -75.18188571
+  },
+  {
+    "name": "Rocco's Italian Sausage & Cheese Steaks",
+    "slug": "roccos_italian_sausage_cheese_steaks",
+    "description": "Half italian sausage half steak, what more do you need to know?",
+    "tier": 1,
+    "latitude": 39.9114767,
+    "longitude": -75.1369263
+  },
+  {
+    "name": "Angelo's Pizzeria",
+    "slug": "angelos_pizzeria",
+    "description": "They bake their own bread.",
+    "tier": 1,
+    "latitude": 39.9406411,
+    "longitude": -75.1577173
+  },
+  {
+    "name": "Shay's Steaks",
+    "slug": "shays_steaks",
+    "description": "No description available",
+    "tier": 1,
+    "latitude": 39.95682361,
+    "longitude": -75.16637648
+  }
+]
